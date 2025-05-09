@@ -62,7 +62,7 @@ public double applyDiscount(double percent) {
 
 ## 🔄 Continuous Integration (CI) mit Jenkins 
 
-Der Build wird bei jedem Git-Push automatisch mit Jenkins ausgeführt: 
+Der Build wird bei jedem Git-Push automatisch mit Jenkins ausgeführt:
 
 ```groovy
 pipeline {
