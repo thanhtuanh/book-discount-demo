@@ -22,6 +22,4 @@ pipeline {
         }
     }
 }
-## ▶️ Projekt lokal starten
-# Tests ausführen
-mvn test
+
