@@ -1,14 +1,9 @@
-
 package com.example.demo;
 
-import main.java.com.example.demo.Book;
-
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class BookTest {
-
     @Test
     void shouldApplyDiscountCorrectly() {
         Book book = new Book("TDD mit Java", 100.0);

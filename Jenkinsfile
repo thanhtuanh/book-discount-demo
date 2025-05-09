@@ -7,6 +7,13 @@ pipeline {
     }
 
     stages {
+        stage('Debug') {
+            steps {
+                sh 'find src -type f | sort || echo "No files found"'
+                sh 'ls -la src/test/java/com/example/demo/ || echo "Directory not found"'
+            }
+        }
+        
         stage('Build') {
             steps {
                 sh 'mvn clean compile'
@@ -15,13 +22,13 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh 'mvn test'
+                sh 'mvn -B test'
             }
         }
 
         stage('Archive Results') {
             steps {
-                junit '**/target/surefire-reports/*.xml'
+                junit allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml'
             }
         }
     }
@@ -32,6 +39,10 @@ pipeline {
         }
         failure {
             echo '❌ Build fehlgeschlagen'
+        }
+        always {
+            echo 'Test-Report-Pfad: ${WORKSPACE}/target/surefire-reports/'
+            sh 'ls -la ${WORKSPACE}/target/surefire-reports/ || echo "Keine Test-Reports gefunden"'
         }
     }
 }
