@@ -26,6 +26,21 @@ pipeline {
             }
         }
 
+        stage('Generate HTML Report') {
+            steps {
+                sh 'mvn surefire-report:report'
+                publishHTML(target: [
+                    reportName : 'Surefire Test Report',
+                    reportDir  : 'target/reports',
+                    reportFiles: 'surefire.html',
+                    keepAll    : true,
+                    alwaysLinkToLastBuild: true,
+                    allowMissing: false
+                ])
+            }
+        }
+
+
         stage('Archive Results') {
             steps {
                 junit allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml'
